@@ -1,0 +1,18 @@
+---
+title: "HelloWolrd"
+output: 
+  pdf_document: 
+    latex_engine: xelatex
+---
+```{r}
+packageVersion("data.table")
+packageVersion("ggplot2")
+packageVersion("fixest")
+packageVersion("knitr")
+packageVersion("dplyr")
+
+```
+
+```{r}
+print("Hello World")
+```
