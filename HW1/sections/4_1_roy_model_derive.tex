@@ -1,0 +1,161 @@
+\subsection{Derivation of Roy Model}
+
+We first start from considering the probability of migration. 
+One migrates under the condition
+
+\begin{equation}
+    w_{1i} > w_{0i} + C
+\end{equation}
+
+Where $w_{0i} = \mu_{0i} + \epsilon_0$ and $w_{1i} = \mu_{1i} + \epsilon_1$, 
+and the error terms together follow a joint-normal distribution
+
+\begin{equation}
+    \mqty(\epsilon_0 \\ \epsilon_1) 
+    \sim
+    \mathcal{N} \qty(
+        \mqty(0 \\ 0),
+        \mqty(\sigma_0^2, \sigma_{01} \\
+              \sigma_{01}, \sigma_1^2)
+    )
+\end{equation}
+
+The probability of migration is then 
+
+\begin{align}
+    P(w_{1i} > w_{0i} + C) &= P(v_i > \mu_0 - \mu_1 + C) \nonumber \\
+    &=1 - \Phi(\frac{\mu_0 - \mu_1 + C}{\sigma_\nu}) \nonumber \\
+    &=1 - \Phi(z)
+\end{align}
+
+The expected wage of an imigrant is
+
+\newcommand{\given}{\mid}
+
+\emph{Note: Subscripts i are neglected for simplicity}
+\begin{align*}
+    \E(w_{0} \given I) =& \E(w_{0} \given v > \mu_0 - \mu_1 + C)  \\
+    =& \mu_0 + \E(\epsilon_0 \given  v > \mu_0 - \mu_1 + C )  \\
+    =& \mu_0 + \E \left(
+            \epsilon_0 \given \frac{\nu}{\sigma_\nu} > \frac{\mu_0 - \mu_1 + C}{\sigma_\nu}
+            \right)
+\end{align*}
+
+A linear combination of random variables following normal distribution
+also follows a normal distribution. Therefore $\E\left(\epsilon_0 \given \frac{\nu}{\sigma_\nu}\right)$
+is just a conditional expectation of a bivariate normal distribution
+consisting $\epsilon$ and $\nu/\sigma_\nu$.
+
+Since for a bivariate normal distribution, we have 
+\begin{equation}
+    \label{eq:biv-exp}
+    \E[X \given Y=y] = \mu_x + \rho_{xy}\frac{\sigma_x}{\sigma_y}(y - \mu_y) 
+\end{equation}
+
+Substituding, we get
+
+\begin{equation*}
+    \E(\epsilon_0 \given \nu)=\rho_{0\nu}\frac{\sigma_0}{\sigma_\nu}\nu
+\end{equation*}
+and hence
+\begin{equation}
+    \label{eq:biv_normal_exp_0}
+    \E(\epsilon_0 \given \frac{\nu}{\sigma_\nu})=
+    \left(\rho_{0\nu} \frac{1}{\sigma_\nu}\right)
+    \frac{\sigma_0}{\sigma_\nu \frac{1}{\sigma_\nu^2}}
+    \frac{\nu}{\sigma_\nu}=\frac{\rho_{0\nu}\sigma_0 }{\sigma_\nu}\nu
+\end{equation}
+
+Therefore
+\begin{align}
+    \E(w_{0} \given I) =& 
+     \mu_0 + \E \left(
+            \epsilon_0 \given \frac{\nu}{\sigma_\nu} > \frac{\mu_0 - \mu_1 + C}{\sigma_\nu}
+            \right) \nonumber \\
+    &= \mu_0 + \rho_{0\nu}\sigma_0 \E \left(
+        \frac{\nu}{\sigma_\nu} 
+        \given
+        \frac{\nu}{\sigma_\nu} > \frac{\mu_0 - \mu_1 + C}{\sigma_\nu}
+    \right) \label{eq:before_trunc}
+\end{align}
+
+Realize that the last expectation in Eq.~\ref{eq:before_trunc}
+is the expected value of a truncated normal distribution, 
+which can rewrite it as 
+
+\begin{equation}
+    \label{eq:exp_wo_1}
+    \E(w_{0} \given I) = 
+    \mu_0 + \rho_{0\nu}\sigma_0 \frac{\phi(z)}{1-\Phi(z)}
+\end{equation}
+
+Since the correlation coefficient can be negative,
+ we know nothing about this result
+Let us preceed and solve for $\rho_{0\nu}$ 
+further for better insight. 
+
+
+\begin{equation*}
+    \rho_{0v} = \frac{\sigma_{0\nu}}{\sigma_0\sigma_\nu}
+\end{equation*}
+\begin{equation}
+    \label{eq:cov_0_nu}
+    \sigma_{0\nu}=cov(\epsilon_0, \nu)=\E(\epsilon_0 (\epsilon_1 - \epsilon_0)) = \sigma_{01}-\sigma_0^2
+\end{equation}
+
+Substitude the result from Eq.~\ref{eq:cov_0_nu} and $\rho_{01}=\sigma_{01}/\sigma_0\sigma_1$, 
+Eq.~\ref{eq:exp_wo_1} now becomes
+\begin{equation}
+    \E(w_{0} \given I) = 
+    \mu_0 + \frac{\sigma_{01}-\sigma_0^2}{\sigma_\nu} \frac{\phi(z)}{1-\Phi(z)}
+    =\mu_0 + \frac{\sigma_0 \sigma_1}{\sigma_\nu}\left(
+        \rho - \frac{\sigma_0}{\sigma_1}
+    \right)\frac{\phi(z)}{1-\Phi(z)}
+\end{equation}
+
+Similarily, for $\E(w_1 \given I)$, we have
+
+\begin{align*}
+    \E(w_{1} \given I) =& \E(w_{1} \given v > \mu_0 - \mu_1 + C)  \\
+    =& \mu_1 + \E(\epsilon_1 \given  v > \mu_0 - \mu_1 + C )  \\
+    =& \mu_1 + \E \left(
+            \epsilon_1 \given \frac{\nu}{\sigma_\nu} > \frac{\mu_0 - \mu_1 + C}{\sigma_\nu}
+            \right)
+\end{align*}
+
+Substituding 1 for 0 in Eq.~\ref{eq:biv_normal_exp_0}, we get
+\begin{equation}
+    \label{eq:biv_normal_exp_1}
+    \E(\epsilon_1 \given \frac{\nu}{\sigma_\nu})
+    =\frac{\rho_{1\nu}\sigma_1}{\sigma_\nu}\nu
+\end{equation}
+
+Eq.~\ref{eq:cov_0_nu} now becomes
+\begin{equation}
+    \label{eq:cov_1_nu}
+    \sigma_{1\nu}=cov(\epsilon_, \nu)=
+    \E(\epsilon_1 (\epsilon_1 - \epsilon_0)) = \sigma_{1}^2-\sigma_{01}
+\end{equation}
+
+Hence together we get
+\begin{equation}
+    \E(w_{1} \given I) = 
+    \mu_1 + \rho_{1\nu}\sigma_1 \frac{\phi(z)}{1-\Phi(z)}
+    =\mu_1 + \frac{\sigma_0 \sigma_1}{\sigma_\nu}\left(
+        \frac{\sigma_1}{\sigma_0} - \rho
+    \right)\frac{\phi(z)}{1-\Phi(z)}
+\end{equation}
+
+\subsection{$Q_0>0$ and $Q_1<0$ ?}
+
+This would imply that
+$$
+\begin{cases}
+    \rho>\frac{\sigma_0}{\sigma_1}\\
+    \rho>\frac{\sigma_0}{\sigma_1}
+\end{cases}
+$$
+But either will exceed 1, making it mathematically imposible to happen since correlation coefficient must be bounded under 1.
+
+Intuitively, it means that people migrate to a place where expectation wage is lower than that in local.
+which is weird and irrational.
