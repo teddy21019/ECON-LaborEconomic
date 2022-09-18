@@ -16,3 +16,35 @@ packageVersion("dplyr")
 ```{r}
 print("Hello World")
 ```
+
+```{r}
+library(MASS)
+library(dplyr)
+```
+
+
+```{r}
+N = 1e7
+mu0 = 10
+mu1 = 15
+sigma0 = 3
+sigma1 = 4.5
+sigma_01 = 2
+
+wage = data.table(
+                  mvrnorm(n=N,
+                          mu=c(mu0, mu1),
+                          Sigma=matrix(c(sigma0, sigma_01, sigma_01, sigma1), 
+                                       ncol=2))
+                  )
+
+
+wage = wage %>% mutate(I = if_else(V2>V1 ,1,0))
+```
+
+```{r}
+E_w0_I = (wage %>% filter(I==0))$V1 %>% mean
+E_w1_I = (wage %>% filter(I==0))$V2 %>% mean
+
+calc_Q0 = mu0 + (sigma0 * sigma1)/sigma_01 * ()
+```
