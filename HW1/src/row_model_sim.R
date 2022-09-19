@@ -50,10 +50,13 @@ calc_Q0 = mu0 + (sigma0 * sigma1)/sigma_nu * (rho - sigma0/sigma1) * IMR
 calc_Q1 = mu1 + (sigma0 * sigma1)/sigma_nu * (sigma1/sigma0 - rho) * IMR
 
 ## Compare
-result = data.frame("Wage in source" = c(E_w0_I, calc_Q0), "Wage in host" = c(E_w1_I, calc_Q1))
+result = data.frame("Source" = c(E_w0_I, calc_Q0), "Host" = c(E_w1_I, calc_Q1))
 rownames(result) = c("Simulation", "Theoretical")
 
 print(
-  xtable(result, caption = "Simulation result versus the theoretical result"),
+  xtable(result, 
+         caption = "Simulation result versus the theoretical result",
+         label = "tab:sim_res",
+         digits=5),
        floating = TRUE, latex.environments = "center",
   file="roy_sim.tex")

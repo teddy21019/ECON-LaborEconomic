@@ -1,0 +1,69 @@
+\subsection{Example in Applied Economics}
+
+A phenomenal example is that published by~\cite{Heckman76}. 
+He estimates the labor supply and wage for females. 
+Not only does the model handles the self-selection problem, it also provides 
+a faster method for estimation, compared to his similar work in 
+\citep[see][]{Heckman74}  
+
+
+
+\subsection{Write Down a Research Question}
+
+I found the concept of self selection extremely useful in explaining 
+"Who take courses that are not in its own department?"
+
+Similar to immigrants and wages, I found an analogy between students and grades.
+Back when I was in the department of physics, some classmates tend to take
+calculus and linear algebra in the department of mathematics, instead of the
+equivalent required course in the department of physics. Those courses are typically
+hard and has a relatively higher proportion of people failing. 
+
+Meanwhile, people like me tend to take the so called "sweet courses", which 
+guarantees a good grade, with little need for effort.
+
+Assume that in average, taking courses in one's own department (Denoted $0$) will get a grade $\mu_0$
+, while taking courses in other department (Denoted $1$) will get a grade $\mu_1$.
+Also assume for now that the personalities of teachers are irrelevant, as well as the interest of individual student; 
+that is, they only seek for a better score.
+
+
+\subsection{Explanation}
+Taking a direct analogy from the immigrants' problem, we know that 
+\begin{enumerate}[label = Case \arabic{enumi}.]
+    \item Students that take other courses are both getting better score than average.
+    This refers to $Q_0>0$ and $Q_1>0$.
+    This happens when $\sigma_1 > \sigma_0$ and $\rho>\frac{\sigma_0}{\sigma_1}$
+
+    If the courses are relevant, for example, \emph{Advanced Linear Algebra} and \emph{Applied Mathematics(I)}
+    \footnote{Mainly covering linear algebra as well}, and the distribution of grades in \emph{Advance Linear Algebra} is more 
+    diverse, then students that are smarter take the other course, mainly because in a course that everyone takes A+(The easier \emph{Applied Mathematics}), 
+    a small mistake might cause the grade to drop, while in the harder \emph{Advanced Linear Algebra}, almost all the 
+    other classmates are noobs, and hence even a relatively big mistake in the exam doesn't change ones' good result much.
+
+    \item Students that take other courses suck at both courses.
+    This refers to $Q_0<0$ and $Q_1<0$.
+    This happens when $\sigma_1 < \sigma_0$ and $\rho>\frac{\sigma_1}{\sigma_0}$
+
+    In contrast to case 1, if taking course in the other department which is relevant has a more steady grade 
+    (obviously not F), then students not performing well in either class will take the one in which the grade don't 
+    fluctuate too much, preventing an unexpected failure that unfortunately might postpone its graduation year.
+
+    \item Students that take other courses that they are good at.
+    This refers to $Q_0<0$ and $Q_1>0$.
+    This happens when $\rho<\min{\frac{\sigma_1}{\sigma_0},\frac{\sigma_0}{\sigma_1} }$
+
+    If the two courses are less irrelevant, like \emph{Classical Electrodynamic Theory} and 
+    \emph{Macroeconomics Theory}, then the students that take the course in the department of economics
+    are the students that perform better in the other field of knowledge. 
+
+    That's how I ended up here.
+
+    \item Students that take other courses that they are not good at.
+    This refers to $Q_0>0$ and $Q_1<0$. 
+    This is mathematically impossible. Refer to section \ref{sec:imposible_case}.
+
+    These are the irrational students, trying to challenge their limits and not thinking thoroughly.
+
+
+\end{enumerate}

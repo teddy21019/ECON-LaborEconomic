@@ -1,15 +1,29 @@
 \documentclass[12pt]{article}
+\usepackage{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{csquotes}
 \usepackage{physics}
+\usepackage{natbib}
+\usepackage{enumitem}
+\usepackage{subcaption}
+
+\geometry{left=2cm, right=2cm}
 
 \DeclareMathOperator{\E}{\mathbb{E}}
 \newcommand{\refeq}[1]{Eq.~(\ref{#1})}
 \input{src/code_style/code.tex}
 
+\author{Chia-wei, Chen\thanks{R10323045}}
+\title{HW1 \\ Labor Economics}
+
+
 \begin{document}
- 
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
 \section{Setups}
 
 \input{sections/1_1_datacamp.tex}
@@ -28,5 +42,12 @@
 
 \section{Simulation}
 \input{sections/4_2_roy_simulation.tex}
+
+\section{Roy Model is Everywhere}
+\input{sections/5_1_roy_everywhere.tex}
+
+\pagebreak
+\bibliographystyle{apa}
+\bibliography{ref}
 
 \end{document}
