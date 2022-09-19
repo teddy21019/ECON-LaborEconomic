@@ -11,6 +11,7 @@ Where $w_{0i} = \mu_{0i} + \epsilon_0$ and $w_{1i} = \mu_{1i} + \epsilon_1$,
 and the error terms together follow a joint-normal distribution
 
 \begin{equation}
+    \label{eq:def_w}
     \mqty(\epsilon_0 \\ \epsilon_1) 
     \sim
     \mathcal{N} \qty(
@@ -20,15 +21,15 @@ and the error terms together follow a joint-normal distribution
     )
 \end{equation}
 
-The probability of migration is then 
+The probability of migration is then, according to \refeq{eq:def_w}
 
 \begin{align}
     P(w_{1i} > w_{0i} + C) &= P(v_i > \mu_0 - \mu_1 + C) \nonumber \\
     &=1 - \Phi(\frac{\mu_0 - \mu_1 + C}{\sigma_\nu}) \nonumber \\
-    &=1 - \Phi(z)
+    &=1 - \Phi(z) \nonumber
 \end{align}
 
-The expected wage of an imigrant is
+The expected wage of an imigrant is then
 
 \newcommand{\given}{\mid}
 
@@ -52,19 +53,21 @@ Since for a bivariate normal distribution, we have
     \E[X \given Y=y] = \mu_x + \rho_{xy}\frac{\sigma_x}{\sigma_y}(y - \mu_y) 
 \end{equation}
 
-Substituding, we get
+Substituding $X=\epsilon_0$ and $Y=\nu$ into \refeq{eq:biv-exp}, we get
 
-\begin{equation*}
-    \E(\epsilon_0 \given \nu)=\rho_{0\nu}\frac{\sigma_0}{\sigma_\nu}\nu
-\end{equation*}
-and hence
 \begin{equation}
     \label{eq:biv_normal_exp_0}
+    \E(\epsilon_0 \given \nu)=\rho_{0\nu}\frac{\sigma_0}{\sigma_\nu}\nu
+\end{equation}
+
+and hence
+
+\begin{equation*}
     \E(\epsilon_0 \given \frac{\nu}{\sigma_\nu})=
     \left(\rho_{0\nu} \frac{1}{\sigma_\nu}\right)
     \frac{\sigma_0}{\sigma_\nu \frac{1}{\sigma_\nu^2}}
     \frac{\nu}{\sigma_\nu}=\frac{\rho_{0\nu}\sigma_0 }{\sigma_\nu}\nu
-\end{equation}
+\end{equation*}
 
 Therefore
 \begin{align}
@@ -79,7 +82,7 @@ Therefore
     \right) \label{eq:before_trunc}
 \end{align}
 
-Realize that the last expectation in Eq.~\ref{eq:before_trunc}
+Realize that the last expectation \refeq{eq:before_trunc}
 is the expected value of a truncated normal distribution, 
 which can rewrite it as 
 
@@ -103,9 +106,10 @@ further for better insight.
     \sigma_{0\nu}=cov(\epsilon_0, \nu)=\E(\epsilon_0 (\epsilon_1 - \epsilon_0)) = \sigma_{01}-\sigma_0^2
 \end{equation}
 
-Substitude the result from Eq.~\ref{eq:cov_0_nu} and $\rho_{01}=\sigma_{01}/\sigma_0\sigma_1$, 
-Eq.~\ref{eq:exp_wo_1} now becomes
+Substitude the result from Eq.~\refeq{eq:cov_0_nu} and $\rho_{01}=\sigma_{01}/\sigma_0\sigma_1$, 
+\refeq{eq:exp_wo_1} now becomes
 \begin{equation}
+    \label{eq:E_0_I}
     \E(w_{0} \given I) = 
     \mu_0 + \frac{\sigma_{01}-\sigma_0^2}{\sigma_\nu} \frac{\phi(z)}{1-\Phi(z)}
     =\mu_0 + \frac{\sigma_0 \sigma_1}{\sigma_\nu}\left(
@@ -123,14 +127,14 @@ Similarily, for $\E(w_1 \given I)$, we have
             \right)
 \end{align*}
 
-Substituding 1 for 0 in Eq.~\ref{eq:biv_normal_exp_0}, we get
+Substituding 1 for 0 in \refeq{eq:biv_normal_exp_0}, we get
 \begin{equation}
     \label{eq:biv_normal_exp_1}
     \E(\epsilon_1 \given \frac{\nu}{\sigma_\nu})
     =\frac{\rho_{1\nu}\sigma_1}{\sigma_\nu}\nu
 \end{equation}
 
-Eq.~\ref{eq:cov_0_nu} now becomes
+\refeq{eq:cov_0_nu} now becomes
 \begin{equation}
     \label{eq:cov_1_nu}
     \sigma_{1\nu}=cov(\epsilon_, \nu)=
@@ -139,6 +143,7 @@ Eq.~\ref{eq:cov_0_nu} now becomes
 
 Hence together we get
 \begin{equation}
+    \label{eq:E_1_I}
     \E(w_{1} \given I) = 
     \mu_1 + \rho_{1\nu}\sigma_1 \frac{\phi(z)}{1-\Phi(z)}
     =\mu_1 + \frac{\sigma_0 \sigma_1}{\sigma_\nu}\left(
@@ -146,9 +151,11 @@ Hence together we get
     \right)\frac{\phi(z)}{1-\Phi(z)}
 \end{equation}
 
+
+
 \subsection{$Q_0>0$ and $Q_1<0$ ?}
 
-This would imply that
+Accordind to \refeq{eq:E_0_I} and \refeq{eq:E_1_I}, this would imply that
 $$
 \begin{cases}
     \rho>\frac{\sigma_0}{\sigma_1}\\
