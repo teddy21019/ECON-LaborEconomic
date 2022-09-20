@@ -31,7 +31,7 @@ The probability of migration is then, according to \refeq{eq:def_w}
     &=1 - \Phi(z) \nonumber
 \end{align}
 
-The expected wage of an imigrant is then
+The expected wage of an immigrant is then
 
 \newcommand{\given}{\mid}
 
@@ -55,7 +55,7 @@ Since for a bivariate normal distribution, we have
     \E[X \given Y=y] = \mu_x + \rho_{xy}\frac{\sigma_x}{\sigma_y}(y - \mu_y) 
 \end{equation}
 
-Substituding $X=\epsilon_0$ and $Y=\nu$ into \refeq{eq:biv-exp}, we get
+Substituting $X=\epsilon_0$ and $Y=\nu$ into \refeq{eq:biv-exp}, we get
 
 \begin{equation}
     \label{eq:biv_normal_exp_0}
@@ -84,9 +84,9 @@ Therefore
     \right) \label{eq:before_trunc}
 \end{align}
 
-Realize that the last expectation \refeq{eq:before_trunc}
+Observe that the last expectation \refeq{eq:before_trunc}
 is the expected value of a truncated normal distribution, 
-which can rewrite it as 
+which can be rewritten as 
 
 \begin{equation}
     \label{eq:exp_wo_1}
@@ -95,8 +95,8 @@ which can rewrite it as
 \end{equation}
 
 Since the correlation coefficient can be negative,
- we know nothing about this result
-Let us preceed and solve for $\rho_{0\nu}$ 
+we know nothing about this result. 
+Let us precede and solve for $\rho_{0\nu}$ 
 further for better insight. 
 
 
@@ -108,7 +108,7 @@ further for better insight.
     \sigma_{0\nu}=cov(\epsilon_0, \nu)=\E(\epsilon_0 (\epsilon_1 - \epsilon_0)) = \sigma_{01}-\sigma_0^2
 \end{equation}
 
-Substitude the result from Eq.~\refeq{eq:cov_0_nu} and $\rho_{01}=\sigma_{01}/\sigma_0\sigma_1$, 
+Substitute the result from \refeq{eq:cov_0_nu} and $\rho_{01}=\sigma_{01}/\sigma_0\sigma_1$, 
 \refeq{eq:exp_wo_1} now becomes
 \begin{equation}
     \label{eq:E_0_I}
@@ -119,7 +119,7 @@ Substitude the result from Eq.~\refeq{eq:cov_0_nu} and $\rho_{01}=\sigma_{01}/\s
     \right)\frac{\phi(z)}{1-\Phi(z)}
 \end{equation}
 
-Similarily, for $\E(w_1 \given I)$, we have
+Similarly, for $\E(w_1 \given I)$, we have
 
 \begin{align*}
     \E(w_{1} \given I) =& \E(w_{1} \given v > \mu_0 - \mu_1 + C)  \\
@@ -129,7 +129,7 @@ Similarily, for $\E(w_1 \given I)$, we have
             \right)
 \end{align*}
 
-Substituding 1 for 0 in \refeq{eq:biv_normal_exp_0}, we get
+Substituting 1 for 0 in \refeq{eq:biv_normal_exp_0}, we get
 \begin{equation}
     \label{eq:biv_normal_exp_1}
     \E(\epsilon_1 \given \frac{\nu}{\sigma_\nu})
@@ -157,14 +157,16 @@ Hence together we get
 
 \subsubsection{$Q_0>0$ and $Q_1<0$ ?}\label{sec:imposible_case}
 
-Accordind to \refeq{eq:E_0_I} and \refeq{eq:E_1_I}, this would imply that
+According to \refeq{eq:E_0_I} and \refeq{eq:E_1_I}, this would imply that
 $$
 \begin{cases}
     \rho>\frac{\sigma_0}{\sigma_1}\\
-    \rho>\frac{\sigma_0}{\sigma_1}
+    \rho>\frac{\sigma_1}{\sigma_0}
 \end{cases}
 $$
-But either will exceed 1, making it mathematically imposible to happen since correlation coefficient must be bounded under 1.
-
+But one will exceed 1, making it mathematically impossible to happen since correlation coefficient must be bounded under 1.
+\begin{equation*}
+    \rho > \max{\frac{\sigma_0}{\sigma_1},\frac{\sigma_1}{\sigma_0}} \ge 1
+\end{equation*}
 Intuitively, it means that people migrate to a place where expectation wage is lower than that in local.
 which is weird and irrational.
