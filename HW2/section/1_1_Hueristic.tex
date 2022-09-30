@@ -1,0 +1,19 @@
+\subsection{Heuristic Identification}
+
+\begin{enumerate}
+    \item \emph{“We don’t have enough sample size to identify the causal effects of the problem.”}
+
+    The sample size doesn't effect the identification. Only the standard error of the estimation is effected.
+
+    \item \emph{“We don’t have a good identification strategy so I need to use a structural model.”}
+    
+    Having a structural model does not guarantee the identification of its parameters.
+
+    \item \emph{“Because I have a structural model, I don’t need to think about identification.”}
+    
+    Same as above, consider a structural model with two indistinguishable clusters. If the two clusters are the same, the identification of the parameters is impossible.
+
+    \item \emph{“Because I can use the maximum likelihood estimator, I can identify that.”}
+    
+    Let's take a counterexample. Assume the maximum likelihood estimator that we constructed is flat around its global maximum (for some reason). The estimation is unidentified in this case.
+\end{enumerate}
