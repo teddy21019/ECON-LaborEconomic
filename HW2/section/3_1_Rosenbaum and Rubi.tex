@@ -1,0 +1,78 @@
+\subsection{Proof of Rosenbaum and Rubin}
+
+Define the propensity score 
+
+\newcommand{\ps}{\mathscr{P}}
+\newcommand{\prob}{\mathrm{Pr}}
+\newcommand{\D}{\mathcal{D}}
+
+\begin{equation}
+    \label{eq:pscore}
+    \ps(x) \equiv \prob(\D = 1 \given X=x)
+\end{equation}
+Given the conditional independence assumption (CIA)
+
+\begin{equation} 
+    \label{eq:CIA}
+    \{ y_0, y_1 \}\indep x
+\end{equation}
+
+We want to show that 
+\begin{equation}
+    \label{eq:RR}
+    \{ y_0, y_1 \} \indep D \given \ps(x)
+\end{equation}
+
+Intuitively, the propensity is a mapping from the space of $X$ to $[0,1]$, such that under this propensity, the potential outcome is independent of its choice $d$.
+
+\begin{proof}
+    Consider $\Pr(\D = 1 \given y_0, y_1, \ps(x))$. By the law of iterated expectation, it is equivalent to
+
+    $$
+        \E\left[
+            \Pr(
+                \D = 1 \given y_0, y_1, \ps(x), x
+            )
+            \given
+            y_0, y_1, \ps(x)
+        \right]
+    $$
+    Since $\ps(x)$ is a function of x, we can neglect $\ps$
+    $$
+        =\E\left[
+            \Pr(
+                \D = 1 \given y_0, y_1, x
+            )
+            \given
+            y_0, y_1, \ps(x)
+        \right]
+    $$
+    We assume CIA, as stated in \refeq{eq:CIA}, hence given $x$, the potential outcome is independent to the choice
+    $$
+    =\E\left[
+        \Pr(
+            \D = 1 \given x
+        )
+        \given
+        y_0, y_1, \ps(x)
+    \right]
+    $$
+    Notice that by definition in \refeq{eq:pscore}, we can write
+    $$
+    =\E\left[
+            \ps(x)
+        \given
+        y_0, y_1, \ps(x)
+    \right]
+    =\ps(x)
+    $$
+    that gives
+    $$
+    \Pr(\D = 1 \given y_0, y_1, \ps(x))
+    = \ps(x)
+    $$
+
+    We have shown that $\D$ given the propensity score is completely independent of the potential outcomes, therefore prooving \refeq{eq:RR}.
+
+
+\end{proof}

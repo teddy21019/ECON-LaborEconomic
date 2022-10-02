@@ -1,0 +1,47 @@
+\subsection{Propensity Score Simulation}
+
+\subsubsection{Code for Simulation}
+
+\fbox{Note that this section covers all the subquestions in this problem.}
+
+\subsubsection{Example of $X_1$}
+
+$X_1$ is the common factor for both outcomes which has the same marginal effect. In the example of migration, think of $X_1$ as the experience, which in both countries increases its wage in the same scale.
+
+$\beta_1$ does not affect the choice of outcomes, but it equally affects both $w_0$ and $w_1$, therefore it can be identified by looking at the value of $w$. 
+
+
+\subsubsection{Define the Propensity Score}
+
+\begin{subequations}
+    \begin{align}
+        w_0 &= \mu_0 + \beta_1 X_1  + \epsilon_0 \label{eq:w0} \\
+        w_1 &= \mu_1 + \beta_1 X_1 + \beta_2 X_2 + \epsilon_1 \label{eq:w1}
+    \end{align}
+\end{subequations}
+
+The propensity score is defined as
+
+\begin{equation}
+    \ps(x_1, x_2) = \Pr(\D = 1 \given X_1=x_1, X_2=x_2) \label{eq:roy_pscore}
+\end{equation}
+
+
+\subsubsection{Derive the Propensity Score}
+Note that in Roy model, people choose $\D = 1$ if $w_1 > w_0 + C$, therefore
+
+\begin{align*}
+    \ps(x_1, x_2) &= \Pr(w_1 > w_0 + C) \\
+    &= \Pr(\mu_1 + \beta_1 x_1 + \beta_2 x_2 + \epsilon_1 > \mu_0 + \beta_1 x_1  + \epsilon_0 + C) \\
+    &= \Pr(\epsilon_0 - \epsilon_1 < 
+        \mu_1 - \mu_0 + \beta_2 x_2 - C
+    ) \\
+    &= \Pr\left(
+        \frac{\nu}{\sigma_\nu} < 
+        \frac{\mu_1 - \mu_0 + \beta_2 x_2 - C}{\sigma_\nu}
+        \right)
+\end{align*}
+
+Where $\nu \equiv \epsilon_0 - \epsilon_1$
+
+% \subsubsection{}

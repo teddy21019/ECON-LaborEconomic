@@ -1,0 +1,45 @@
+\subsection{Identification of MLE}
+
+\begin{equation*}
+    y_i = \epsilon_i^1 + \epsilon_i^2
+\end{equation*}
+
+\subsubsection{Likelihood Function}
+
+The sum of two normally distributed random variables is also normally distributed, hence
+
+\begin{equation}
+    y_i \sim \mathcal{N}(0, \sigma_1^2 + \sigma_2^2)
+\end{equation}
+
+Define $\sigma_y^2 = \sigma_1^2 + \sigma_2^2$. The likelihood function is then 
+
+\begin{equation}
+    f(\sigma_1^2, \sigma_2^2 ; \{y_i\}) = 
+    \prod_{i=1}^N 
+    \frac{1}{\sqrt{2\pi \sigma_y^2}} 
+    e^{-\frac{1}{2} \left( \frac{y_i}{\sigma_y}\right)^2}
+\end{equation}
+
+
+
+\subsubsection{Simulation}
+
+\lstinputlisting[language = R]{src/1_4.R}
+
+The results are 3.227986 and 6.455974, which is not so close to the parameter I initially set.
+
+
+\subsubsection{Distinguish $\sigma_1$ from $\sigma_2$}
+
+$\sigma_1$ and $\sigma_2$ can be interchanged and the result will remain the same. This implies that for all possible element in the parameter set $\theta_0 \in \Theta$, there will be a interchanged counterpart of the parameter $\theta_0$ as long as $\sigma_1 \ne \sigma_2$. Therefore the parameter set is not guaranteed to be singleton.
+
+\subsubsection{$\sigma_1^2 + \sigma_2^2 $}
+
+The combined random variable $y$ is a one-dimensional normal distribution. The standard deviation can be explicitly computed using the maximum likelihood function. It is hence identified. 
+
+\subsubsection{Does the procedure in question 2 make sense?}
+
+Although the parameters are not uniquely determined, we still get the two standard deviations of the structural model. It is not identified, but sure it makes sense. 
+
+P.S. In non-parametric models such as the Gaussian mixture model, we estimate the properties as well as the proportion of clusters. It is also not identified, but as long as finding the clusters is the only thing we care about, it is meaningful. 

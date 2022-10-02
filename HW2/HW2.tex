@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 
 \usepackage{geometry}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb, mathrsfs, amsthm}
 \usepackage{graphicx}
 \usepackage{csquotes}
 \usepackage{physics}
@@ -14,6 +14,10 @@
 
 \DeclareMathOperator{\E}{\mathbb{E}}
 \newcommand{\refeq}[1]{Eq.~(\ref{#1})}
+\newcommand{\given}{\mid}
+\newcommand{\indep}{\perp \!\!\! \perp}
+
+\input{section/code.tex}
 
 \begin{document}
     \maketitle
@@ -22,6 +26,13 @@
     \input{section/1_1_Hueristic.tex}
     \input{section/1_2_OLS.tex}
     \input{section/1_3_factor.tex}
+    \input{section/1_4_MLE.tex}
 
+    \section{Potential Outcome Framework}
+    \input{section/2_1potential.tex}
+
+    \section{Control for Observables}
+    \input{section/3_1_Rosenbaum and Rubi.tex}
+    \input{section/3_2_simulation.tex}
   
 \end{document}
