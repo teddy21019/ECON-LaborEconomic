@@ -3,6 +3,7 @@
 \subsubsection{Code for Simulation}
 
 \fbox{Note that this section covers all the subquestions in this problem.}
+\lstinputlisting[language = R]{src/row_model_sim_x.R}
 
 \subsubsection{Example of $X_1$}
 
@@ -44,4 +45,43 @@ Note that in Roy model, people choose $\D = 1$ if $w_1 > w_0 + C$, therefore
 
 Where $\nu \equiv \epsilon_0 - \epsilon_1$
 
-% \subsubsection{}
+\subsubsection{Theoretical Propensity Score}
+
+Demonstrated in code. 
+
+\subsubsection{Propensity Score from Logit}
+
+Demonstrated in code.
+
+\subsubsection{Correlation between Theoretical and Empirical Propensity Score}
+
+The correlation coefficient in this simulation is $0.979$.
+
+\subsubsection{Conduct IPW estimate}
+We construct IPW estimate by dividing $w_0$ with $1-\ps(x)$ 
+and $w_1$ with $\ps(x)$
+
+The average treatment effect
+$$
+    \tau = \E(w_1 - w_0) = \E[\E(w_1 - w_0 \given X)] = \E(\mu_1 - \mu_0 + \beta_2 X_2 + \epsilon_1 - \epsilon_0)
+$$
+can then be estimated by
+\begin{equation}
+    \E\left( \frac{w\D}{\ps(X)} \right) - \E\left( \frac{w(1-\D)}{1 - \ps(X)} \right)
+    = \frac{1}{N} \sum_{i=1}^N \left[
+        \frac{d_i w_i}{\ps(x_i)} - \frac{(1-d_i) w_i}{1 - \ps(x_i)}
+    \right]
+\end{equation}
+
+Do this for both the analytical propensity score and empirical propensity score, 
+we have the estimated average treatment effect.
+
+For the theoretical propensity score, I get -1.704; 
+while for the empirical propensity score, I get 3.49
+
+\subsubsection{Regress on $\D$}
+\input{src/OLS_D.tex}
+
+\subsubsection{Regress with Control Variable}
+See Table~\ref{tab:reg}
+

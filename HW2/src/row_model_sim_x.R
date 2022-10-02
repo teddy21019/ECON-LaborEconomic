@@ -3,7 +3,8 @@ library(data.table)
 library(dplyr)
 library(xtable)
 library(Matrix)
-setwd("~/111-1/Labor Economic/HW2/src")
+library(stargazer)
+setwd("C:/Users/tedb0/Documents/111-1/Labor Economic/HW2/src")
 
     ## Parameters settings
 N = 1e7
@@ -28,7 +29,7 @@ sigma_matrix = bdiag(sigma_matrix, diag(1,2,2))
 
     ## Creating error terms, saving to data.table 
 wage = data.table(
-  mvrnorm(n=N,mu=c(0, 0, mux1, mux2 ),Sigma=sigma_matrix)
+  mvrnorm(n=N,mu=c(0, 0, mux1, mux2 ), Sigma=sigma_matrix)
 )
 
   ## Rename
@@ -46,21 +47,28 @@ wage[, W  := W1 * D + W0 * (1-D)]
     ## Calculate the theoretical value
 
 ## Calculate rho_nu 
-rho = sigma_01/(sigma0 * sigma1)
 sigma_nu = sqrt( sigma0^2 + sigma1^2 - 2 * sigma_01 )
 
 wage[, p_score_theor := dnorm((mu1 - mu0 + beta2 * x2 - C)/sigma_nu) ]
 
 ## Estimate logit to get propensity score
 
-wage[,p_score_est := predict(
-  glm(D~x1+x2, family = binomial(link = "logit"))
+wage[, p_score_est := predict(
+  glm(D~x2, family = binomial(link = "logit"))
   , type = "response"),]
 
 cor_p_score = wage[,cor(p_score_theor, p_score_est),]
 
-wage[, IPW_theor := W/ifelse(D, p_score_theor, 1-p_score_theor)]
-wage[, IPW_est :=  W/ifelse(D, p_score_est, 1-p_score_est)]
+wage[, IPW_theor := W/ifelse(D, p_score_theor, -1 + p_score_theor)]
+wage[, IPW_est :=  W/ifelse(D, p_score_est, -1 + p_score_est)]
 
-lm_theor = wage[, lm(DPW_theor~D)]
-lm_est = wage[, lm(DPW_est~D)]
+ATE_theor = mu1 - mu0 + beta2 * mux2
+ATE_prop_theor = wage[, mean(IPW_theor)]
+ATE_prop_est = wage[, mean(IPW_est)]
+
+
+model_ols_1 = wage[,lm(W~D)]
+stargazer(model_ols_1,model_ols_2, out = "OLS_D.tex", table.placement = "h", 
+          keep.stat = c("rsq"), label = "tab:reg")
+
+
