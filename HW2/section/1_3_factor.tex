@@ -22,10 +22,36 @@ By \refeq{eq:y-it}, we know $y_{i,t-1} = \nu_{i,t-1} + \epsilon_{i,t-1}$, hence 
     y_{i,t} = \rho y_{i,t-1} - \rho \epsilon_{i,t-1} + \epsilon_{i,t} + \xi_{i,t}
 \end{equation}
 
-The linear relation between $y_{i,t}$ and $y_{i,t-1}$ guarantees that there cannot exist more than one $\rho$s. It is then obvious that $\rho$ is identified.
+The linear relation between $y_{i,t}$ and $y_{i,t-1}$ guarantees that there cannot exist more than one $\rho$s. 
+It is then obvious that $\rho$ is identified, and is $\rho = \E\left(\frac{y_{i,t}}{y_{i,t-1}}\right)$
 
 \subsubsection{$\sigma_\epsilon^2$}
 
+$\epsilon^2$ is the measurement error from each observation of an AR(1) process. 
+Given a certain time moment, we can observe the covariance of $y_{i,t}$ and $y_{i,t-1}$
+
+\begin{align*}
+    Cov(y_{i,t}, y_{i,t-1}) &= Cov( y_{i,t-1} , \rho y_{i,t-1} - \rho \epsilon_{i,t-1} + \epsilon_{i,t} + \xi_{i,t}) \\
+    &= \rho Var_{i}(y_{i,t}) - \rho Var(\epsilon_{i,t-1}) \\
+    &= \rho(Var_{i}(y_{i,t}) - \sigma_\epsilon^2)
+\end{align*}
+
+Since we have the variance of all data points from the last period, 
+and $\rho$ can be obtained, we can calculate $\sigma_\epsilon^2$
+
 \subsubsection{$\sigma_\xi^2$}
 
+We now see the variance of $y_{i,t}$
+
+\begin{align*}
+    Var(y_{i,t}) &= Var(\rho y_{i,t-1} - \rho \epsilon_{i,t-1} + \epsilon_{i,t} + \xi_{i,t}) \\
+    &= \rho^2 Var(y_{i,t-1} - \epsilon_{i,t-1}) + \sigma_\epsilon^2 + \sigma_\xi^2 \\
+    &= \rho^2 Var(y_{i,t-1}) + (1-\rho^2)\sigma_\epsilon^2 + \sigma_\xi^2
+\end{align*}
+
+Again, we have all we need from the previous subquestions, therefore $\sigma_\epsilon$ can be identified.
+
 \subsubsection{Estimator}
+
+The estimators are provided above. Through all of them are not efficient, 
+it is theoretically unbiased. 
