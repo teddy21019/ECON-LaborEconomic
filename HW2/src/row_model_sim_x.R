@@ -7,7 +7,7 @@ library(stargazer)
 setwd("C:/Users/tedb0/Documents/111-1/Labor Economic/HW2/src")
 
     ## Parameters settings
-N = 1e7
+N = 1e5
 mu0 = 10
 mu1 = 15
 sigma0 = 3
