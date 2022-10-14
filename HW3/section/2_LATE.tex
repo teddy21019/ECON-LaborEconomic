@@ -1,0 +1,98 @@
+$$
+\operatorname{LATE}_{z^{\prime}}^z=
+\frac{E[Y \mid Z=z]-E\left[Y \mid z=z^{\prime}\right]}
+{E[D \mid Z=z]-E\left[D \mid z=z^{\prime}\right]}
+=\int_0^1 \operatorname{MTE}(u) \times 
+    \frac{1\left\{u \in\left[p\left(z^{\prime}\right), p(z)\right]\right\}}
+    {p(z)-p\left(z^{\prime}\right)} d u
+$$
+
+\subsection{}
+\begin{proof}
+    First, note that $\ps(z) = \Pr(D=1 \given Z=z)$, 
+which is the proportion of observations that gets the treatment
+given the state of instrument $z$, which will be $\E(D \given Z=z)$.
+
+
+Accordingly, $\E(D \given Z=z) - \E(D \given Z=z') = \ps(z) - \ps(z')$, 
+thus corresponds to the denominator of the weight.
+\end{proof}
+
+
+\subsection{}
+Show that $\E[Y \given Z=z] = 
+\E[Y_1 \given U \le \ps(Z)]\ps(z) + \E[Y_0 \given U > \ps(Z)](1-\ps(z))$
+
+\begin{proof}
+    We start by expression $y$ in the potential outcome framework
+    \begin{align*}
+        \E[Y \given Z=z] 
+        &= \E[ Y_1 D + Y_0 (1-D)  \given Z=z] \\
+        &= \E[ Y_1 D \given Z=z] + \E[Y_0 (1-D)  \given Z=z]\\
+    \end{align*}
+
+The probability of $D=1$ given $z$ is the propensity score $\ps(z) = \Pr(D=1 \given Z=z)$
+, and $D=1$ implies $\tilde{U} \le \ps(Z)$. Together we get
+
+    \begin{align}
+        \label{eq: 2_2}
+        &= \E[Y_1 \given \tilde{U} \le \ps(z)]\ps(z) + \E[Y_0 \given \tilde{U} > \ps(z)](1-\ps(z))
+    \end{align}
+    
+    Where $1-\ps(z)$ is the probability of not choosing $D=1$, which is the probability of choosing $D=0$
+\end{proof}
+
+\subsection{}
+Show that 
+$$
+\E[Y \given Z=z] = 
+\int_0^{\ps(z)} \E[Y_1 \given \tilde{U} = u ] du + \int_{\ps(z)}^1 \E[Y_0 \given \tilde{U} =u ]du
+$$
+\begin{proof}
+
+\newcommand{\U}{\tilde{U}}
+
+Let us start with $\E[Y_1 \given \tilde{U} \le \ps(z)]$ in \refeq{eq: 2_2}. 
+The condition is a range, hence we expand it into
+\begin{equation*}
+    \E[Y_1 \given \U \le \ps(z)] = 
+    \int_0^1 
+    \frac{\E[Y_1 \given \U=u]}{\Pr(\U \le \ps(z))} \one\{ u \le \ps(z) \} dF_{\U}(u)
+\end{equation*}
+
+Since $\U \sim \operatorname{Unif}[0,1]$, $\Pr(\U \le \ps(z)) = \ps(z)$, and $dF_{\U}(u) = 1 du$. The above term simplifies to 
+
+\begin{equation*}
+    \frac{1}{\ps(z)}\int_0^{\ps(z)} \E[Y_1 \given \U=u] du
+\end{equation*}
+
+Similarly, 
+\begin{equation*}
+    \E[Y_0 \given \U > \ps(z)] = \frac{1}{1-\ps(z)}\int^1_{\ps(z)} \E[Y_0 \given \U=u] du
+\end{equation*}
+
+Substitute into \refeq{eq: 2_2}, we get
+\begin{equation*}
+    \E[Y \given Z=z] = 
+\int_0^{\ps(z)} \E[Y_1 \given \tilde{U} = u ] du + \int_{\ps(z)}^1 \E[Y_0 \given \tilde{U} =u ]du
+\end{equation*}
+
+\end{proof}
+
+
+\subsection{}
+
+\begin{proof}
+    
+    \begin{align*}
+        & \int_0^{\ps(z)} \E[Y_1 \given \tilde{U} = u ] du 
+        + \int_{\ps(z)}^1 \E[Y_0 \given \tilde{U} =u ]du
+        -\int_0^{\ps(z')} \E[Y_1 \given \tilde{U} = u ] du 
+        - \int_{\ps(z')}^1 \E[Y_0 \given \tilde{U} =u ]du \\
+        &= \int^{p(z)}_{p(z')}  \E[Y_1 \given \tilde{U} = u ] du 
+        - \int^{p(z)}_{p(z')}  \E[Y_0 \given \tilde{U} = u ] du \\
+        &= \int^{p(z)}_{p(z')}  \E[Y_1 - Y_0 \given \tilde{U} = u ] du \\
+        &= \int^{p(z)}_{p(z')}  \operatorname{MTE}(u) du \\
+    \end{align*}
+    
+\end{proof}

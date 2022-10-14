@@ -1,0 +1,65 @@
+\begin{equation*}
+    Y_{it} = \rho Y_{i t-1} + \delta_i + \epsilon_{it}
+\end{equation*}
+
+with $Cov(\epsilon_{it}, Y_{is}) = 0 \quad \forall s \le t-1$
+
+\subsection{Show the inconsistency of FE estimator}
+We first demean the entire model
+
+\begin{align*}
+    Y_{it} - \bar{Y_i} = \rho (Y_{i t-1} - \bar{Y}_{i, -1}) + (\epsilon_{it} - \bar{\epsilon_i})
+\end{align*}
+
+This is an OLS with no constant term. Ideally we can extract $\rho$ 
+by regressing $Y_{it} - \bar{Y_i}$ on $(Y_{i t-1} - \bar{Y}_{i, -1})$, 
+but there exist correlation between the error term and the regressor, 
+therefore it is doomed to be inconsistent (if T is not big enough).
+
+\begin{proof}
+    
+    \begin{align}
+        & Cov((Y_{i t-1} - \bar{Y}_{i, -1}), (\epsilon_{it} - \bar{\epsilon_i})) \nonumber \\
+        &= Cov(Y_{i t-1}, \epsilon_{it}) - Cov(Y_{i t-1}, \bar{\epsilon_i})
+            -Cov(\bar{Y}_{i, -1}, \epsilon_{it}) + Cov(\bar{Y}_{i, -1}, \bar{\epsilon_i}) \label{eq:all_cov}
+    \end{align}
+
+    Note that 
+    \begin{align*}
+        Cov(Y_{i t-1}, \bar{\epsilon_i}) &= Cov(Y_{i t-1}, \frac{1}{T}\sum_0^{T} \epsilon_{it})\\
+        &= \frac{1}{T} Cov(Y_{i t-1}, \epsilon_{it-1}) \neq 0
+    \end{align*}
+
+    The last equation comes from the assumption that  $Cov(\epsilon_{it}, Y_{is}) = 0 \quad \forall s \le t-1$
+
+    Other terms in \refeq{eq:all_cov} are zero according to the assumption as well.
+
+    Therefore we prove that as long as $T$ is finite, the fixed effect estimation for $\rho$ 
+    is inconsistent.
+
+\end{proof}.
+
+\subsection{Taking first difference}
+
+\begin{equation*}
+    \begin{array}{rcl}
+        Y_{it} &=& \rho Y_{it-1} + \delta_i + \epsilon_{it}   \\ 
+        -) Y_{it-1} &=& \rho Y_{it-2} + \delta_i + \epsilon_{it-1}\\
+        \cline{1-3}\\
+        Y_{it}  - Y_{it-1} &=& \rho( Y_{it-1} -Y_{it-2}) + (\epsilon_{it} - \epsilon_{it-1}) \\ 
+    \end{array}
+\end{equation*}
+
+\subsection{OLS on first difference}
+
+The correlation between the error term and the regressor still remains.
+
+\begin{proof}
+    \begin{align*}
+        & Cov((Y_{it-1} -Y_{it-2}), (\epsilon_{it} - \epsilon_{it-1})) = ... \\
+        &= Cov(Y_{it-1}, \epsilon_{it-1}) \neq 0
+    \end{align*}
+\end{proof}
+
+We can, however, choose an instrumental variable such that it correlates with $y_{it-1}$ but not $y_{it}$. 
+The second lag term will $Y_{it-2}$ be a good choice.

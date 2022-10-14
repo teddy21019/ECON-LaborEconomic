@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+
+\usepackage{geometry}
+\usepackage{amsmath,amssymb, mathrsfs, amsthm}
+\usepackage{graphicx}
+\usepackage{dsfont}
+
+
+\author{Chia-wei, Chen\thanks{R10323045}}
+\title{HW3 \\ Labor Economics}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+\newcommand{\refeq}[1]{Eq.~(\ref{#1})}
+\newcommand{\given}{\mid}
+\newcommand{\indep}{\perp \!\!\! \perp}
+\newcommand{\ps}{\mathscr{P}}
+\newcommand{\one}{\mathds{1}}
+
+\begin{document}
+    \maketitle
+    \section{Normalization of the Selection Equation}
+    \input{section/1_ATT.tex}
+
+    \section{Derivation of the Weights for LATE}
+    \input{section/2_LATE.tex}
+
+    \section{Policy Relevance Treatment Effect}
+    \input{section/3_PRTE.tex}
+
+    \section{Arellano-Bond}
+    \input{section/4_Arellano-Bond.tex}
+\end{document}

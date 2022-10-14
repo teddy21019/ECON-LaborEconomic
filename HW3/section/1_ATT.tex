@@ -1,0 +1,46 @@
+\subsection{Distribution of $F_U(U)$}
+
+We consider the CDF of the CDF, that is, 
+\begin{quote}
+    How much of the U's will the CDF of U be less than y?
+\end{quote}
+
+Apparently this is exactly the definition of a CDF, hence this number is trivially $y$, and therefore we know
+\begin{equation*}
+    \Pr(F_U(U) \le y) = y
+\end{equation*}, 
+which is a uniform distribution between $[0,1]$
+
+
+\subsection{$\ps(z) = F_U(v(z))$ 
+\protect\footnote{I denote the propensity score as $\ps$.}}
+
+The original definition of selection is 
+\begin{equation*}
+    D = \one (U \le v(Z) ) = \one (\tilde{U} \le F_U(v(Z)))
+\end{equation*}
+where $\tilde{U}\equiv F_U(U)$. 
+This holds because CDF is a increasing function.
+
+Therefore inside the propensity score we substitute $D=1$ with the condition
+\begin{equation*}
+    F_U(U) \le F_U(v(Z))
+\end{equation*}
+
+Hence
+\begin{equation*}
+    \ps(z) = \Pr(D=1 \given Z=z) = \Pr(F_U(U) \le F_U(v(Z)) \given Z=z) = \Pr(F_U(U) \le F_U(v(z)) )
+\end{equation*}
+
+Because $F_U(U)$ is uniformly distributed, we conclude that
+
+\begin{equation*}
+    \ps(z) = F_U(v(z))
+\end{equation*}
+
+\subsection{Show that $D = \one \{ \tilde{U} \le \ps(Z) \}$}
+
+A direct substitution should do the work.
+\begin{equation*}
+    D = \one (U \le v(Z) ) = \one (\tilde{U} \le F_U(v(Z))) = \one (\tilde{U} \le p(Z))
+\end{equation*}

@@ -1,0 +1,54 @@
+\subsection{ATE}
+
+The ATE measures
+
+\begin{equation*}
+    \E[Y_1 - Y_0]
+\end{equation*}
+
+It is the expected difference of future average earning on whether one attends college or not.
+
+\subsection{ATT}
+
+The ATT measures 
+
+\begin{equation*}
+    \E[Y_1 - Y_0 \given D=1]
+\end{equation*}
+
+It is the expected difference of future average earning for people that attended college. 
+This is a what if question: \emph{What will be a bachelors' future earning if he doesn't go to college?}
+
+\subsection{PRTE}
+
+Although the treatment effect mentioned above tells us some aspects of potential outcome, 
+it is not really useful for policy makers. For example, given a ATE, a consultant tell the policy makers 
+\emph{This is the average different of earning, but I can't tell you whether changing the tuition makes any different.}
+Similarly, the ATT tell the policy maker \emph{I don't know whether this policy make people tend to attend college more or not, 
+but if they already attend college, this will be how much they earn.}
+
+The policy relevant treatment effect, on the other hand, 
+considers together the difference in the outcome we are interested in ($Y$) as well as the 
+change in the decision making process according to a policy driven channel ($Z*$ changing $D$). 
+
+With PRTE, we can estimate the effect of conducting a policy. 
+
+\subsection{Relationship with LATE}
+
+The local average treatment effect is defined as
+
+\begin{equation*}
+    \operatorname{LATE} = \E[Y_1 - Y-0 \given D_z = z, D_{z*} = z*]
+\end{equation*}
+
+and its estimation
+\begin{equation*}
+    \widehat{LATE} = \frac
+    {\E[Y \given Z=z*] - \E[Y \given Z=z]}
+    {\E[D \given Z=z*] - \E[D \given Z=z]}
+\end{equation*}
+
+Notice that the only different with PRTE is the condition. 
+Requiring $\E(Y*) = \E[Y \given Z=z*]$ and vice versa is the key for the two to match.
+Intuitively, the PRTE will be equivalent to LATE if the samples that we consider 
+are the ones that given a change in policy, it will definitely react to it. 
