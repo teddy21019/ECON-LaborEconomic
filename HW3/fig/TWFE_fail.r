@@ -1,28 +1,18 @@
----
-title: "TWFE_fail"
-output: 
-  pdf_document: 
-    latex_engine: xelatex
-    keep_tex: yes
----
-
-```{r}
 library(tidyverse)
-setwd("C:\\Users\\tedb0\\Documents\\111-1\\Labor Economic\\HW3\\fig")
-```
-
-```{r}
-## DGP
-set.seed(1)
-
+library(plm)
+library(did)
 mu = 2 # the real treatment effect
 
 nobs = 100
 year_range =  2000:2022
 nstates = 40
 years_treat = c(2005, 2010, 2015, 2020)
-```
-```{r}
+
+
+#############################
+# Data generating process
+#############################
+
 DGP = function(){
   alpha_i = tibble(
     unit = 1:nobs,
@@ -56,9 +46,12 @@ DGP = function(){
       y_value = (2022 - year_of_treatment) + unit_fe + year_fe + tau + error
     )
 }
-```
 
-```{r}
+
+#############################
+# Visualizing the DGE
+#############################
+
 df = DGP()
 plot1 <- df %>% 
   ggplot(aes(x = year, y = y_value, group = unit)) + 
@@ -74,18 +67,14 @@ plot1 <- df %>%
 
 plot1
 #ggsave(filname="sim_twfe.eps",  plot1)
-```
-
-```{r}
-library(plm)
-
-twfe = plm(y_value~treat, data=df, model = 'within',effect='twoways')
-
-summary(twfe)
-```
 
 
-```{r}
+
+#############################
+# Monte Carlo Simulation
+#############################
+
+
 N_sim = 1000
 coef_results = matrix(0, nrow = N_sim, ncol = 1)
 
@@ -94,20 +83,16 @@ for(s in 1:N_sim){
   twfe = plm(y_value~treat, data=df, model = 'within',effect='twoways')
   coef_results[s,1] = coef(twfe)["treat"]
 }
-
-```
-
-```{r}
 monte_sim = data.frame(coef = coef_results) %>% ggplot() +
   geom_histogram(aes(x = coef)) 
 t.test(coef_results, mu=mu)
 
-ggsave("monte_sim.eps", monte_sim)
+#ggsave("monte_sim.eps", monte_sim)
 
-```
 
-```{r}
-library(did)
+#############################
+# Using the did package
+#############################
 
 df = DGP() %>% select(unit, year, year_of_treatment, y_value)
 
@@ -119,17 +104,17 @@ CS.ATT = att_gt(
   control_group = "notyettreated",
   bstrap = FALSE,
   data = df)
-CS.ATT
+
 event_std = aggte(CS.ATT, type = 'dynamic')
+
 did_package_result = 
   data.frame(TE = event_std$att.egt, year = -14:14, 
-           CI_UP = event_std$att.egt + event_std$se.egt,
-           CI_LO = event_std$att.egt - event_std$se.egt) %>% 
+             CI_UP = event_std$att.egt + event_std$se.egt,
+             CI_LO = event_std$att.egt - event_std$se.egt) %>% 
   ggplot() +
   geom_point(aes(x = year, y=TE), size=2) +
   geom_ribbon(aes(x = year, ymin = CI_LO, ymax = CI_UP), alpha=0.2, color = "lightgrey")+
   xlab("Relative year")+ylab("ATT(t,g) Estimated")
 did_package_result
 
-ggsave("did_package_result.eps", did_package_result)
-```
+#ggsave("did_package_result.eps", did_package_result)
