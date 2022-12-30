@@ -1,0 +1,21 @@
+\begin{thebibliography}{}
+
+\bibitem[Caputo et~al., 2014]{IEEE_phish}
+Caputo, D.~D., Pfleeger, S.~L., Freeman, J.~D., and Johnson, M.~E. (2014).
+\newblock Going spear phishing: Exploring embedded training and awareness.
+\newblock {\em IEEE Security and Privacy}, 12(1):28--38.
+
+\bibitem[Chen et~al., 2018]{Chen2018}
+Chen, Y., YeckehZaare, I., and Zhang, A.~F. (2018).
+\newblock Real or bogus: Predicting susceptibility to phishing with economic
+  experiments.
+\newblock {\em {PLOS} {ONE}}, 13(6):e0198213.
+
+\bibitem[Kumaraguru et~al., 2009]{Kumaraguru2009}
+Kumaraguru, P., Cranshaw, J., Acquisti, A., Cranor, L., Hong, J., Blair, M.~A.,
+  and Pham, T. (2009).
+\newblock School of phish: A real-world evaluation of anti-phishing training.
+\newblock In {\em Proceedings of the 5th Symposium on Usable Privacy and
+  Security}, SOUPS '09, New York, NY, USA. Association for Computing Machinery.
+
+\end{thebibliography}
